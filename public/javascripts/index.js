@@ -120,7 +120,9 @@ const updateResults = (pageNumber) => {
         })
     
         for(let i=startingIndex; i<startingIndex + listLength; i++) {
-            rawBooks[i].style.display = 'table-row';
+            if(rawBooks[i]) {
+                rawBooks[i].style.display = 'table-row';
+            }
         }
 }
 

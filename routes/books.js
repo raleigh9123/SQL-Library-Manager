@@ -18,7 +18,7 @@ router.get('/', asyncHandler(async (req, res) => {
   const books = await Book.findAll({
     order: [['year', 'DESC']]
   });
-  res.render("books/", { books, title: "Books" });
+  res.render("books/", { books, title: "Library Application" });
 }));
 
 /* GET /books/new - Shows the 'create new book' form */

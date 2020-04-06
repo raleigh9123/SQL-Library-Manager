@@ -2,8 +2,10 @@ extends ../layout
 
 block content
   h1= title
-  p
-    a.button(href='/books/new') Create New Book
+  div.header
+    include search
+    p
+      a.button(href='/books/new') Create New Book
   table
     thead
       tr
@@ -19,8 +21,6 @@ block content
           td= book.author
           td= book.genre
           td= book.year
-
-  include search
 
   block scripts
     script(src="/javascripts/index.js")
