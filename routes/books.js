@@ -3,10 +3,10 @@ const express = require('express');
 const router = express.Router();
 const Book = require('../models').Book;
 
-function asyncHandler(cb){
+function asyncHandler(callback){
   return async(req, res, next) => {
     try {
-      await cb(req, res, next)
+      await callback(req, res, next)
     } catch(error){
       res.status(500).send(error);
     }
@@ -16,9 +16,9 @@ function asyncHandler(cb){
 /* GET /books - Shows the full books list. */
 router.get('/', asyncHandler(async (req, res) => {
   const books = await Book.findAll({
-    order: [['createdAt', 'DESC']]
+    order: [['year', 'DESC']]
   });
-  res.render("books/index", { books, title: "Books" });
+  res.render("books/", { books, title: "Books" });
 }));
 
 /* GET /books/new - Shows the 'create new book' form */
@@ -33,7 +33,6 @@ router.post('/new', asyncHandler(async (req, res) => {
     await Book.create(req.body);
     res.redirect("/books") 
   } catch(error) {
-    console.log(error);
     if(error.name === "SequelizeValidationError") {
       book = await Book.build(req.body);
       res.render("books/new_book", {book, errors: error.errors, title: "New Book"})
@@ -64,7 +63,6 @@ router.post('/:id', asyncHandler(async (req, res) => {
       res.render("books/page_not_found", {title: "Page Not Found"})
     }
   } catch(error) {
-    console.log(error);
     if(error.name === "SequelValidationError") {
       let book = await Book.build(req.body);
       book.id = req.params.id;

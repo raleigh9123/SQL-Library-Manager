@@ -13,10 +13,14 @@ block content
         th Year
     tbody
       each book in books 
-        book
-          tr
-            td
-              a(href='/books/' + book.id)= book.title
-            td= book.author
-            td= book.genre
-            td= book.year
+        tr
+          td
+            a(href='/books/' + book.id)= book.title
+          td= book.author
+          td= book.genre
+          td= book.year
+
+  include search
+
+  block scripts
+    script(src="/javascripts/index.js")
