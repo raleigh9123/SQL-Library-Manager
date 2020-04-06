@@ -62,6 +62,10 @@ th {
 tr {
   min-height: 50px;
 }
+tbody tr:hover {
+  transform: scale(1.05);
+  transition: .2s ease all;
+}
 
 tr:nth-child(2n) {
   background: #E7E7E7;
